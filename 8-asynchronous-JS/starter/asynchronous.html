@@ -12,19 +12,19 @@
     <h1>Asynchronous JavaScript</h1>
     <script>
         /*
-                                                                                                                                                                                                                                                                const second = () => {
-                                                                                                                                                                                                                                                                    setTimeout(() => {
-                                                                                                                                                                                                                                                                        console.log('Async Hooray!!!')
-                                                                                                                                                                                                                                                                    }, 2000);
-                                                                                                                                                                                                                                                                    // console.log('Second Hooray!!!') -->
-                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                const first = () => {
-                                                                                                                                                                                                                                                                    console.log('Hooray!!!');
-                                                                                                                                                                                                                                                                    second();
-                                                                                                                                                                                                                                                                    console.log('End Hooray!!!');
-                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                first();
-                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                        const second = () => {
+                                                                                                                                                                                                                                                                            setTimeout(() => {
+                                                                                                                                                                                                                                                                                console.log('Async Hooray!!!')
+                                                                                                                                                                                                                                                                            }, 2000);
+                                                                                                                                                                                                                                                                            // console.log('Second Hooray!!!') -->
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                        const first = () => {
+                                                                                                                                                                                                                                                                            console.log('Hooray!!!');
+                                                                                                                                                                                                                                                                            second();
+                                                                                                                                                                                                                                                                            console.log('End Hooray!!!');
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                        first();
+                                                                                                                                                                                                                                                                        */
         // OLD WAY ASYNCHRONOUS CALLBACKS
         /*
         function getRecipe() {
@@ -115,8 +115,7 @@
             }
 
         }
-        const rec = getRecipesW();
-        console.log(rec);
+        getRecipesW().then(result => console.log(`${result} is the best ever!`));
     </script>
 </body>
 
