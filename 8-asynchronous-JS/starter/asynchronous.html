@@ -6,25 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Asynchronous JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        div {
+            margin: 1.5rem auto;
+        }
+        
+        ul {
+            list-style: none;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Asynchronous JavaScript</h1>
+    <div class="container">
+        <div class="btn">
+            <button class="btn-todo">Get Todos</button>
+        </div>
+        <div class="todos-list">
+            <ul id="todolist">
+                <li>Today is a good Day</li>
+            </ul>
+        </div>
+    </div>
     <script>
         /*
-                                                                                                                                                                                                                                                                        const second = () => {
-                                                                                                                                                                                                                                                                            setTimeout(() => {
-                                                                                                                                                                                                                                                                                console.log('Async Hooray!!!')
-                                                                                                                                                                                                                                                                            }, 2000);
-                                                                                                                                                                                                                                                                            // console.log('Second Hooray!!!') -->
-                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                        const first = () => {
-                                                                                                                                                                                                                                                                            console.log('Hooray!!!');
-                                                                                                                                                                                                                                                                            second();
-                                                                                                                                                                                                                                                                            console.log('End Hooray!!!');
-                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                        first();
-                                                                                                                                                                                                                                                                        */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        const second = () => {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            setTimeout(() => {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                console.log('Async Hooray!!!')
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }, 2000);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            // console.log('Second Hooray!!!') -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        const first = () => {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            console.log('Hooray!!!');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            second();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            console.log('End Hooray!!!');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        first();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
         // OLD WAY ASYNCHRONOUS CALLBACKS
         /*
         function getRecipe() {
@@ -53,6 +81,7 @@
         }
         getRecipe();
         */
+        /*
         const getIDs = new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve([523, 883, 432, 974]);
@@ -99,7 +128,8 @@
                     .catch(err => {
                         console.log(`You have a problem in calling ${err}`);
                     });
-                    */
+                   */
+        /* 
         async function getRecipesW() {
             try {
                 const IDs = await getIDs;
@@ -116,6 +146,67 @@
 
         }
         getRecipesW().then(result => console.log(`${result} is the best ever!`));
+        */
+        /////////////////////////////
+        /* FOR LATER PRACTICE
+        ////////////////////////////
+        const noCros = 'https://cors-anywhere.herokuapp.com/';
+        const baseUrl = 'https://www.metaweather.com'
+        async function fetchMe(id) {
+
+            const weather = await fetch(`${noCros}/${baseUrl}/api/location/${id}/`);
+            return weather.json();
+
+            const wJson = await 
+        }
+        fetchMe(2487956);
+        ///////////////////////////
+        */
+        /*
+        function getTodos() {
+            const noCros = '';
+            //const noCros = 'https://cors-anywhere.herokuapp.com';
+            const baseUrl = 'https://jsonplaceholder.typicode.com/';
+            const finalURL = `${noCros}${baseUrl}todos?_limit=15`;
+            fetch(finalURL)
+                .then(result => {
+                    console.log(result);
+                    return result.json();
+                })
+                .then(data => {
+                    const list = document.querySelector('ul');
+                    console.log(data);
+                    data.forEach(todo => console.log(`Your todo of today is: ${todo.title}.`));
+
+
+                    //let theList = list.childNodes[1];
+                    // data.forEach(todo => theList = `<li>${todo.title}</li>`);
+
+                    return data;
+                })
+                .catch(err => console.log(err));
+
+
+
+        }
+        getTodos();
+        */
+
+        async function getTodos(limit) {
+            try {
+                const noCros = '';
+                //const noCros = 'https://cors-anywhere.herokuapp.com';
+                const baseUrl = 'https://jsonplaceholder.typicode.com/';
+                const finalURL = `${noCros}${baseUrl}todos?_limit=${limit}`;
+                const result = await fetch(finalURL);
+                const data = await result.json();
+                data.forEach(todo => console.log(`Your todo of today is: ${todo.title}.`));
+                // console.log(data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getTodos(7);
     </script>
 </body>
 
