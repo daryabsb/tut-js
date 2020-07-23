@@ -15,13 +15,13 @@ export default class Search {
       } else {
         num = "";
       }
-      console.log(num);
+      // console.log(num);
       const result = await axios(
         `${searchURL}?query=${this.query + num}&apiKey=${apiKey}`
       );
       this.result = result.data.results;
       //console.log(result.data.results);
-      //console.log(this.result);
+      console.log(this.result);
     } catch (err) {
       console.log(err);
     }
