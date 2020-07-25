@@ -21,6 +21,7 @@ const controlSearch = async () => {
   //   console.log("Hooray");
   // 1. Get query from view
   let query = await searchView.getInput(); // TODO
+  console.log(query);
   if (query) {
     // 2. New search object and add to state
     state.search = new Search(query);
@@ -28,7 +29,7 @@ const controlSearch = async () => {
     // 3. Prepare UI for result
 
     // 4. search for recipes
-    await state.search.getResult();
+    await state.search.getResult(query);
 
     // 5. Render result on UI
     console.log(state.search.results);

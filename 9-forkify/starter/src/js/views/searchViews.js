@@ -7,7 +7,7 @@ const renderRecipe = recipe => {
                 <li>
                     <a class="results__link results__link--active" href="#23456">
                         <figure class="results__fig">
-                            <img src="img/test-1.jpg" alt="Test">
+                            <img src="recipe.image" alt="Test">
                         </figure>
                         <div class="results__data">
                             <h4 class="results__name">Pasta with Tomato ...</h4>
@@ -18,5 +18,6 @@ const renderRecipe = recipe => {
 };
 
 export const renderResult = recipes => {
+  //   console.log(recipe);
   recipes.forEach(renderRecipe);
 };

@@ -1,27 +1,25 @@
 import axios from "axios";
 export default class Search {
-  constructor(query, number) {
+  constructor(query) {
     this.query = query;
-    this.number = number;
   }
-
-  async getResult(query, number) {
+  // https://api.edamam.com/search?q=pizza&app_id=ae923f55&app_key=c180230477b277f56a0e6e75c61f23ae
+  async getResult(query) {
     try {
-      const apiKey = "813d09a5639c40c1a365135933f6dbc9";
-      const searchURL = "https://api.spoonacular.com/recipes/search";
-      let num;
-      if (this.number) {
-        num = "&number=" + this.number;
-      } else {
-        num = "";
-      }
-      // console.log(num);
+      const apiKey = "c180230477b277f56a0e6e75c61f23ae";
+      const app_id = "ae923f55";
+      const searchURL = "https://api.edamam.com/search";
+
+      // console.log(`${searchURL}?q=${query}&app_id=${app_id}&app_key=${apiKey}`);
       const result = await axios(
-        `${searchURL}?query=${this.query + num}&apiKey=${apiKey}`
+        `${searchURL}?q=${query}&app_id=${app_id}&app_key=${apiKey}`
       );
-      this.result = result.data.results;
-      //console.log(result.data.results);
-      console.log(this.result);
+      // console.log(result.data.hits.recipe);
+
+      this.result = result.data.hits; //.data.hits.recipe;
+      // console.log(result.data.hits.recipe));
+      this.result.forEach(recipe => console.log(recipe.recipe));
+      // console.log(this.result);
     } catch (err) {
       console.log(err);
     }
