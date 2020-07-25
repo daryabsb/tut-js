@@ -1,0 +1,16 @@
+{
+    "name": "add-to-cart",
+    "version": "1.0.0",
+    "description": "a code pen example to create a beautiful add to cart button",
+    "main": "script.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "scss-compile": "node-sass -rw ./scss -o ./css",
+        "watch": "npm run scss-compile"
+    },
+    "author": "Darya Ibrahim",
+    "license": "ISC",
+    "dependencies": {
+        "gsap": "^3.4.2"
+    }
+}
