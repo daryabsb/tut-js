@@ -18,7 +18,7 @@ export default class Search {
 
       this.result = result.data.hits; //.data.hits.recipe;
       // console.log(result.data.hits.recipe));
-      this.result.forEach(recipe => console.log(recipe.recipe));
+      // this.result.forEach(recipe => console.log(recipe.recipe));
       // console.log(this.result);
     } catch (err) {
       console.log(err);
