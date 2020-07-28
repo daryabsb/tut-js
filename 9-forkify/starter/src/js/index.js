@@ -5,6 +5,7 @@
 // URL: https://api.spoonacular.com/recipes/search
 
 import Search from "./models/Search";
+import Recipe from "./models/Recipe";
 import * as searchView from "./views/searchViews";
 import { elements, renderLoader, clearLoader } from "./views/base";
 
@@ -17,6 +18,7 @@ GLOBAL STATE OF THE APP
 */
 const state = {};
 
+// Search controller
 const controlSearch = async () => {
   //   console.log("Hooray");
   // 1. Get query from view
@@ -44,6 +46,23 @@ elements.searchForm.addEventListener("submit", el => {
   el.preventDefault();
   controlSearch();
 });
+
+elements.searchResPages.addEventListener("click", e => {
+  const btn = e.target.closest(".btn-inline");
+  if (btn) {
+    const goToPage = parseInt(btn.dataset.goto, 10);
+    searchView.clearResult();
+    searchView.renderResults(state.search.result, goToPage);
+  }
+});
+
+const r = new Recipe(
+  "http://www.edamam.com/ontologies/edamam.owl#recipe_09b4dbdf0c7244c462a4d2622d88958e"
+);
+r.getRecipe();
+console.log(r);
+// Recipe controller
+const controlRecipe = async () => {};
 
 // controlSearch();
 // console.log(state);

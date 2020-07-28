@@ -3,7 +3,10 @@ import { elements } from "./base";
 export const getInput = () => elements.searchInput.value;
 
 export const clearInput = () => (elements.searchInput.value = "");
-export const clearResult = () => (elements.searchResList.innerHTML = "");
+export const clearResult = () => {
+  elements.searchResList.innerHTML = "";
+  elements.searchResPages.innerHTML = "";
+};
 /*
  * Pasta with Tomato and spinach
  * 0
@@ -48,12 +51,13 @@ const createButton = (page, type) => `
 <button class="btn-inline results__btn--${type}" data-goto=${
   type === "prev" ? page - 1 : page + 1
 }>
+<span>Page ${type === "prev" ? page - 1 : page + 1}</span>
 <svg class="search__icon">
     <use href="img/icons.svg#icon-triangle-${
       type === "prev" ? "left" : "right"
     }"></use>
 </svg>
-<span>Page ${type === "prev" ? page - 1 : page + 1}</span>
+
 </button>`;
 
 const renderButtons = (page, numResults, resPerPage) => {
@@ -70,12 +74,17 @@ const renderButtons = (page, numResults, resPerPage) => {
     // Only button goes to prev
     button = createButton(page, "prev");
   }
+  elements.searchResPages.insertAdjacentHTML("afterbegin", button);
 };
 
-export const renderResults = (recipes, page = 1, resPerPage = 10) => {
+export const renderResults = (recipes, page = 1, resPerPage = 3) => {
   //   console.log(recipe);
+  // Render results of current page
   const srart = (page - 1) * resPerPage;
   const end = page * resPerPage;
 
   recipes.slice(srart, end).forEach(renderRecipe);
+
+  // Render pagination buttons
+  renderButtons(page, recipes.length, resPerPage);
 };
