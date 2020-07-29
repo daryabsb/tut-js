@@ -32,13 +32,19 @@ const controlSearch = async () => {
     searchView.clearInput();
     searchView.clearResult();
     renderLoader(elements.searchRes);
-    // 4. search for recipes
-    await state.search.getResult(query);
 
-    // 5. Render result on UI
-    // console.log(state.search.results);
-    clearLoader();
-    searchView.renderResults(state.search.result);
+    try {
+      // 4. search for recipes
+      await state.search.getResult(query);
+
+      // 5. Render result on UI
+      // console.log(state.search.results);
+      clearLoader();
+      searchView.renderResults(state.search.result);
+    } catch (error) {
+      console.log(error);
+      clearLoader();
+    }
   }
 };
 
@@ -55,14 +61,46 @@ elements.searchResPages.addEventListener("click", e => {
     searchView.renderResults(state.search.result, goToPage);
   }
 });
-
 const r = new Recipe(
   "http://www.edamam.com/ontologies/edamam.owl#recipe_09b4dbdf0c7244c462a4d2622d88958e"
 );
+// console.log(r);
 r.getRecipe();
 console.log(r);
+r.parseIngredients();
+// console.log(r);
+
+const controlRecipe = async () => {
+  const id = window.location.hash.replace("#", "");
+  // console.log(id);
+
+  if (id) {
+    // Prepare UI for changes
+
+    // Create a new recipe object
+    state.recipe = new Recipe(id);
+    try {
+      // Get recipe data
+      await state.recipe.getRecipe();
+      // Calculate servings
+      state.recipe.calcTime();
+      state.recipe.calcServings();
+
+      // Render Recipe
+      // console.log(state.recipe);
+    } catch (error) {
+      console.log("Your api doesn't work very well!");
+    }
+  }
+};
+
+// window.addEventListener("hashchange", controlRecipe);
+// window.addEventListener("load", controlRecipe);
+["hashchange", "load"].forEach(event =>
+  window.addEventListener(event, controlRecipe)
+);
+
 // Recipe controller
-const controlRecipe = async () => {};
 
 // controlSearch();
 // console.log(state);
