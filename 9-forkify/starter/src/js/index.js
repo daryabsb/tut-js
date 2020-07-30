@@ -5,8 +5,10 @@
 // URL: https://api.spoonacular.com/recipes/search
 
 import Search from "./models/Search";
+
 import Recipe from "./models/Recipe";
 import * as searchView from "./views/searchViews";
+import * as recipeView from "./views/recipeViews";
 import { elements, renderLoader, clearLoader } from "./views/base";
 
 /*
@@ -61,13 +63,13 @@ elements.searchResPages.addEventListener("click", e => {
     searchView.renderResults(state.search.result, goToPage);
   }
 });
-const r = new Recipe(
-  "http://www.edamam.com/ontologies/edamam.owl#recipe_09b4dbdf0c7244c462a4d2622d88958e"
-);
+// const r = new Recipe(
+//   "http://www.edamam.com/ontologies/edamam.owl#recipe_09b4dbdf0c7244c462a4d2622d88958e"
+// );
 // console.log(r);
-r.getRecipe();
-console.log(r);
-r.parseIngredients();
+// r.getRecipe();
+// console.log(r);
+// r.parseIngredients();
 // console.log(r);
 
 const controlRecipe = async () => {
@@ -76,17 +78,20 @@ const controlRecipe = async () => {
 
   if (id) {
     // Prepare UI for changes
+    renderLoader(elements.recipe);
 
     // Create a new recipe object
     state.recipe = new Recipe(id);
     try {
-      // Get recipe data
       await state.recipe.getRecipe();
-      // Calculate servings
+
+      state.recipe.parseIngredients();
       state.recipe.calcTime();
       state.recipe.calcServings();
 
       // Render Recipe
+      clearLoader();
+      recipeView.renderRecipe(state.recipe);
       // console.log(state.recipe);
     } catch (error) {
       console.log("Your api doesn't work very well!");
