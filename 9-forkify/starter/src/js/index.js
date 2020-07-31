@@ -21,47 +21,47 @@ GLOBAL STATE OF THE APP
 const state = {};
 
 // Search controller
-const controlSearch = async () => {
-  //   console.log("Hooray");
-  // 1. Get query from view
-  let query = await searchView.getInput(); // TODO
-  // console.log(query);
-  if (query) {
-    // 2. New search object and add to state
-    state.search = new Search(query);
+const controlSearch = async() => {
+    //   console.log("Hooray");
+    // 1. Get query from view
+    let query = await searchView.getInput(); // TODO
+    // console.log(query);
+    if (query) {
+        // 2. New search object and add to state
+        state.search = new Search(query);
 
-    // 3. Prepare UI for result
-    searchView.clearInput();
-    searchView.clearResult();
-    renderLoader(elements.searchRes);
+        // 3. Prepare UI for result
+        searchView.clearInput();
+        searchView.clearResult();
+        renderLoader(elements.searchRes);
 
-    try {
-      // 4. search for recipes
-      await state.search.getResult(query);
+        try {
+            // 4. search for recipes
+            await state.search.getResult(query);
 
-      // 5. Render result on UI
-      // console.log(state.search.results);
-      clearLoader();
-      searchView.renderResults(state.search.result);
-    } catch (error) {
-      console.log(error);
-      clearLoader();
+            // 5. Render result on UI
+            // console.log(state.search.results);
+            clearLoader();
+            searchView.renderResults(state.search.result);
+        } catch (error) {
+            console.log(error);
+            clearLoader();
+        }
     }
-  }
 };
 
 elements.searchForm.addEventListener("submit", el => {
-  el.preventDefault();
-  controlSearch();
+    el.preventDefault();
+    controlSearch();
 });
 
 elements.searchResPages.addEventListener("click", e => {
-  const btn = e.target.closest(".btn-inline");
-  if (btn) {
-    const goToPage = parseInt(btn.dataset.goto, 10);
-    searchView.clearResult();
-    searchView.renderResults(state.search.result, goToPage);
-  }
+    const btn = e.target.closest(".btn-inline");
+    if (btn) {
+        const goToPage = parseInt(btn.dataset.goto, 10);
+        searchView.clearResult();
+        searchView.renderResults(state.search.result, goToPage);
+    }
 });
 // const r = new Recipe(
 //   "http://www.edamam.com/ontologies/edamam.owl#recipe_09b4dbdf0c7244c462a4d2622d88958e"
@@ -72,37 +72,37 @@ elements.searchResPages.addEventListener("click", e => {
 // r.parseIngredients();
 // console.log(r);
 
-const controlRecipe = async () => {
-  const id = window.location.hash.replace("#", "");
-  // console.log(id);
+const controlRecipe = async() => {
+    const id = window.location.hash.replace("#", "");
+    // console.log(id);
 
-  if (id) {
-    // Prepare UI for changes
-    renderLoader(elements.recipe);
+    if (id) {
+        // Prepare UI for changes
+        renderLoader(elements.recipe);
 
-    // Create a new recipe object
-    state.recipe = new Recipe(id);
-    try {
-      await state.recipe.getRecipe();
+        // Create a new recipe object
+        state.recipe = new Recipe(id);
+        try {
+            await state.recipe.getRecipe();
 
-      state.recipe.parseIngredients();
-      state.recipe.calcTime();
-      state.recipe.calcServings();
+            state.recipe.parseIngredients();
+            state.recipe.calcTime();
+            state.recipe.calcServings();
 
-      // Render Recipe
-      clearLoader();
-      recipeView.renderRecipe(state.recipe);
-      // console.log(state.recipe);
-    } catch (error) {
-      console.log("Your api doesn't work very well!");
+            // Render Recipe
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
+            // console.log(state.recipe);
+        } catch (error) {
+            console.log("Your api doesn't work very well!");
+        }
     }
-  }
 };
 
 // window.addEventListener("hashchange", controlRecipe);
 // window.addEventListener("load", controlRecipe);
 ["hashchange", "load"].forEach(event =>
-  window.addEventListener(event, controlRecipe)
+    window.addEventListener(event, controlRecipe)
 );
 
 // Recipe controller
