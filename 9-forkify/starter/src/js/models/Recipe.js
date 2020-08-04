@@ -65,6 +65,7 @@ export default class Recipe {
             "cup",
             "pound"
         ];
+
         const units = [...unitsShort, "kg", "g"];
 
         // console.log(this.ingredients);
@@ -87,7 +88,7 @@ export default class Recipe {
             if (unitIndex > -1) {
                 //   // There is a unit
                 // console.log("A");
-                const arrCount = arrIng.slice(0, unitIndex); // Ex 4 1/2 cups, arrCount = 4 1/2
+                const arrCount = parseFloat(arrIng.slice(0, unitIndex)); // Ex 4 1/2 cups, arrCount = 4 1/2
                 let count;
                 if (arrCount.length === 1) {
                     // console.log("B");
@@ -124,5 +125,19 @@ export default class Recipe {
         });
         // }
         this.ingredients = newIngredients;
+    }
+    updateServings(type) {
+        // Servings
+        const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+        // Ingredients
+        this.ingredients.forEach(ing => {
+            ing.count *= (newServings / this.servings);
+
+        });
+
+        this.servings = newServings;
+
+
     }
 }
